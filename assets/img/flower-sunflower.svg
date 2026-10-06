@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 76" width="56" height="76" fill="none">
+  <path d="M28,76 Q26,50 28,28" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
+  <ellipse cx="36" cy="54" rx="7" ry="3.5" transform="rotate(30 36 54)" fill="#4ade80"/>
+  <ellipse cx="20" cy="58" rx="6" ry="3" transform="rotate(-30 20 58)" fill="#4ade80"/>
+  <g transform="translate(28,22)">
+    <circle cx="0" cy="0" r="16" fill="#f59e0b"/>
+    <circle cx="0" cy="0" r="13" fill="#fbbf24"/>
+    <circle cx="0" cy="0" r="8" fill="#78350f"/>
+    <!-- Pequeños pétalos punteados -->
+    <circle cx="0" cy="-14" r="3" fill="#fef08a"/>
+    <circle cx="14" cy="0" r="3" fill="#fef08a"/>
+    <circle cx="0" cy="14" r="3" fill="#fef08a"/>
+    <circle cx="-14" cy="0" r="3" fill="#fef08a"/>
+  </g>
+</svg>

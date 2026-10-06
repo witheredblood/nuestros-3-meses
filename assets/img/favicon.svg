@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="corazonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4d6d"/>
+      <stop offset="100%" stop-color="#c9184a"/>
+    </linearGradient>
+  </defs>
+  <!-- Corazón romántico -->
+  <path d="M32 56 C14 42 6 30 6 19 A13 13 0 0 1 32 14 A13 13 0 0 1 58 19 C58 30 50 42 32 56 Z" 
+        fill="url(#corazonGrad)"/>
+  <!-- Brillo del corazón -->
+  <path d="M16 18 C16 14 20 11 25 10 C21 12 18 15 18 19 C18 21 16 21 16 18 Z" 
+        fill="#ffffff" opacity="0.6"/>
+  <!-- Pequeña flor blanca sobre el corazón -->
+  <g transform="translate(38, 22)">
+    <circle cx="0" cy="-6" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="6" cy="0" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="0" cy="6" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="-6" cy="0" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="0" cy="0" r="2.5" fill="#facc15"/>
+  </g>
+</svg>

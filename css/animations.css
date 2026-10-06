@@ -1,0 +1,93 @@
+/* ==========================================================================
+   ANIMATIONS.CSS
+   Keyframes, Transiciones fluidas y Soporte para prefers-reduced-motion
+   ========================================================================== */
+
+/* Brillo metálico / reflejo suave sobre botones */
+@keyframes brilloBoton {
+  0%, 70% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Latido del aura detrás del ramo de flores */
+@keyframes latidoAura {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+/* Florecimiento y rotación inicial del ramo */
+@keyframes florecerRamo {
+  0% { transform: scale(0.4) rotate(-6deg); opacity: 0; }
+  60% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Crecimiento y apertura elástica de una flor al tocar la pantalla */
+@keyframes crecerFlor {
+  0% { transform: translate(-50%, -100%) scale(0) rotate(-15deg); opacity: 0; }
+  70% { transform: translate(-50%, -100%) scale(1.15) rotate(4deg); opacity: 1; }
+  100% { transform: translate(-50%, -100%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Parpadeo clásico del cursor de máquina de escribir */
+@keyframes parpadeoCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Pulso y flotación de textos interactivos ("Toca aquí...") */
+@keyframes pulsoTexto {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Dispersión de partículas y corazoncitos al atrapar */
+@keyframes volarParticula {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3); opacity: 0; }
+}
+
+/* Resplandor y balanceo del anillo */
+@keyframes brilloAnillo {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(4deg); }
+}
+
+/* Pulso suave del botón de música */
+@keyframes pulseMusic {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4); }
+}
+
+/* Brote animado para la flor de la pantalla de carga */
+@keyframes broteLoader {
+  0%, 100% { transform: scale(0.85) rotate(-5deg); opacity: 0.8; }
+  50% { transform: scale(1.15) rotate(5deg); opacity: 1; }
+}
+
+/* Animación del icono de rotación cuando el celular se gira */
+@keyframes girarTelefono {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-90deg); }
+}
+
+/* ==========================================================================
+   ACCESIBILIDAD Y RENDIMIENTO: PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .screen {
+    transition: opacity 0.2s ease !important;
+    transform: none !important;
+  }
+
+  .btn-romantic::after {
+    display: none;
+  }
+}

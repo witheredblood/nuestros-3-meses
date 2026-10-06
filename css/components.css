@@ -1,0 +1,784 @@
+/* ==========================================================================
+   COMPONENTS.CSS
+   Botones, Tarjetas, Sobre, Carta, Jardín, Juego y Pregunta Imposible
+   ========================================================================== */
+
+/* ==========================================================================
+   BOTONES ROMÁNTICOS
+   ========================================================================== */
+.btn-romantic {
+  background: linear-gradient(135deg, var(--rosa-vibrante) 0%, var(--rosa-fuerte) 100%);
+  color: var(--texto-blanco);
+  border: none;
+  outline: none;
+  padding: 16px 30px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-limpia);
+  border-radius: var(--radius-boton);
+  box-shadow: var(--sombra-boton);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  min-width: 200px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.btn-romantic::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
+  transform: translateX(-100%);
+  animation: brilloBoton 4s infinite;
+  pointer-events: none;
+}
+
+.btn-romantic:active {
+  transform: scale(0.95);
+  filter: brightness(0.95);
+}
+
+/* ==========================================================================
+   TARJETAS GLASSMORPHISM
+   ========================================================================== */
+.glass-card {
+  background: var(--blanco-vidrio);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--borde-vidrio);
+  border-radius: var(--radius-card);
+  box-shadow: var(--sombra-romantica);
+  width: 100%;
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.badge-romantico {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--rosa-fuerte);
+  border: 1px solid var(--rosa-suave);
+  margin-bottom: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(255, 117, 143, 0.15);
+}
+
+/* ==========================================================================
+   PORTADA
+   ========================================================================== */
+#screen-portada {
+  text-align: center;
+  justify-content: space-around;
+  padding-top: 40px;
+}
+
+.portada-title {
+  font-family: var(--font-cursiva);
+  font-size: 42px;
+  color: var(--rosa-oscuro);
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
+}
+
+.portada-name {
+  font-family: var(--font-elegante);
+  font-size: 26px;
+  font-style: italic;
+  color: var(--rosa-fuerte);
+  margin-bottom: 8px;
+}
+
+.portada-quote {
+  font-size: 15.5px;
+  color: var(--texto-suave);
+  line-height: 1.45;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.bouquet-wrapper {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bouquet-aura {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.5) 0%, rgba(255, 229, 236, 0) 70%);
+  border-radius: 50%;
+  animation: latidoAura 3s infinite ease-in-out;
+}
+
+.bouquet-img {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 20px rgba(201, 24, 74, 0.22));
+  transform-origin: bottom center;
+  animation: florecerRamo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   CARTA DE AMOR & SOBRE
+   ========================================================================== */
+#screen-carta {
+  justify-content: center;
+  gap: 16px;
+}
+
+.envelope-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 210px;
+  margin: 18px auto 10px;
+  cursor: pointer;
+  perspective: 1000px;
+  transition: height 0.6s ease;
+}
+
+.envelope-container.open {
+  height: 380px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--rosa-pastel);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 12px 25px rgba(201, 24, 74, 0.15);
+  border: 2px solid #f472b6;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 158px solid transparent;
+  border-right: 158px solid transparent;
+  border-top: 110px solid #f472b6;
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.envelope-container.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 158px solid #fda4af;
+  border-right: 158px solid #fda4af;
+  border-bottom: 110px solid #fb7185;
+  border-top: 90px solid transparent;
+  border-radius: 0 0 14px 14px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.envelope-stamp {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  background: radial-gradient(circle, #e11d48 0%, #9f1239 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 6;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  border: 2px dashed #ffe4e6;
+}
+
+.envelope-container.open .envelope-stamp {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.3);
+}
+
+.letter-paper {
+  position: absolute;
+  top: 15px;
+  left: 12px;
+  right: 12px;
+  background: #fffdfa;
+  background-image: linear-gradient(#fdf2f8 1px, transparent 1px);
+  background-size: 100% 24px;
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border: 1px solid #fecdd3;
+  z-index: 2;
+  transition: transform 0.8s cubic-bezier(0.34, 1.3, 0.64, 1);
+  max-height: 180px;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.envelope-container.open .letter-paper {
+  transform: translateY(-115px);
+  max-height: 380px;
+  height: 340px;
+  z-index: 7;
+  opacity: 1;
+  overflow-y: auto;
+  box-shadow: 0 16px 35px rgba(201, 24, 74, 0.22);
+}
+
+.letter-header {
+  font-family: var(--font-cursiva);
+  font-size: 26px;
+  color: var(--rosa-fuerte);
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--rosa-suave);
+  padding-bottom: 4px;
+  text-align: left;
+}
+
+.letter-content {
+  font-size: 15.5px;
+  line-height: 24px;
+  color: #4a1d24;
+  text-align: left;
+  min-height: 140px;
+  white-space: pre-line;
+  font-family: var(--font-limpia);
+  font-weight: 600;
+}
+
+.letter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: var(--rosa-vibrante);
+  vertical-align: text-bottom;
+  animation: parpadeoCursor 0.8s infinite;
+}
+
+.letter-footer {
+  font-family: var(--font-cursiva);
+  font-size: 22px;
+  color: var(--rosa-fuerte);
+  text-align: right;
+  margin-top: 12px;
+}
+
+.envelope-hint {
+  text-align: center;
+  font-size: 14px;
+  color: var(--rosa-fuerte);
+  font-weight: 600;
+  animation: pulsoTexto 1.8s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   JARDÍN QUE FLORECE AL TOCAR
+   ========================================================================== */
+#screen-jardin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  touch-action: none;
+  background: linear-gradient(180deg, #fdf2f8 0%, #fef3c7 65%, #dcfce7 88%, #bbf7d0 100%);
+}
+
+.jardin-header {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 16px;
+  right: 16px;
+  z-index: 30;
+  pointer-events: none;
+  text-align: center;
+}
+
+.jardin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 18px;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  font-size: 16px;
+  font-weight: 700;
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.jardin-instruccion {
+  font-size: 14px;
+  color: #047857;
+  margin-top: 6px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.9);
+  animation: pulsoTexto 2s infinite;
+}
+
+.jardin-progress-bar {
+  width: 140px;
+  height: 6px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 10px;
+  margin: 6px auto 0;
+  overflow: hidden;
+}
+
+.jardin-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #34d399, #10b981);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+#jardin-interactive-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: crosshair;
+}
+
+.spawned-flower {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: bottom center;
+  animation: crecerFlor 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+}
+
+.jardin-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  visibility: hidden;
+  width: 88%;
+  max-width: 340px;
+  z-index: 50;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.jardin-modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ==========================================================================
+   MINIJUEGO: ATRAPA LOS CORAZONES
+   ========================================================================== */
+#screen-juego {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  touch-action: none;
+  background: linear-gradient(180deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%);
+}
+
+.juego-hud {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 16px;
+  right: 16px;
+  z-index: 30;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.juego-score-badge {
+  background: var(--blanco-vidrio);
+  border: 1.5px solid var(--borde-vidrio);
+  padding: 8px 22px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--rosa-fuerte);
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.juego-progress-track {
+  width: 180px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.juego-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #f43f5e, #be123c);
+  border-radius: 10px;
+  transition: width 0.25s ease;
+}
+
+.juego-hint {
+  font-size: 13px;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+#juego-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.falling-heart {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: manipulation;
+  transition: transform 0.1s linear;
+  filter: drop-shadow(0 4px 8px rgba(225, 29, 72, 0.25));
+}
+
+.falling-heart:active {
+  transform: scale(0.85);
+}
+
+.mini-pop {
+  position: absolute;
+  pointer-events: none;
+  font-size: 18px;
+  animation: volarParticula 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  z-index: 25;
+}
+
+.juego-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  visibility: hidden;
+  width: 88%;
+  max-width: 340px;
+  z-index: 50;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.juego-modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ==========================================================================
+   LA PREGUNTA IMPOSIBLE
+   ========================================================================== */
+#screen-pregunta {
+  justify-content: space-around;
+  text-align: center;
+  padding: 36px 20px;
+  position: relative;
+}
+
+.pregunta-titulo {
+  font-family: var(--font-cursiva);
+  font-size: 38px;
+  color: var(--rosa-oscuro);
+  line-height: 1.25;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7);
+}
+
+.pregunta-subtitulo {
+  font-size: 15.5px;
+  color: var(--texto-suave);
+  font-weight: 600;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.pregunta-ring-img {
+  width: 95px;
+  height: 95px;
+  margin: 10px auto;
+  filter: drop-shadow(0 6px 14px rgba(245, 158, 11, 0.3));
+  animation: brilloAnillo 2.5s infinite ease-in-out;
+}
+
+.pregunta-actions {
+  position: relative;
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 15px;
+}
+
+#btn-si {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  z-index: 15;
+}
+
+#btn-no {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 40px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-limpia);
+  cursor: pointer;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.15s ease;
+  touch-action: none;
+  z-index: 20;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   FINAL / CELEBRACIÓN
+   ========================================================================== */
+#screen-final {
+  justify-content: space-around;
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.final-badge {
+  display: inline-block;
+  background: #fdf2f8;
+  border: 1px solid #f472b6;
+  color: #be185d;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.final-title {
+  font-family: var(--font-cursiva);
+  font-size: 46px;
+  color: var(--rosa-oscuro);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.final-card {
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: var(--radius-card);
+  padding: 24px 20px;
+  border: 1.5px solid var(--borde-vidrio);
+  box-shadow: var(--sombra-romantica);
+  margin: 12px 0;
+}
+
+.final-card-text {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: #4a1d24;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.final-signature {
+  font-family: var(--font-cursiva);
+  font-size: 26px;
+  color: var(--rosa-fuerte);
+  text-align: right;
+}
+
+.final-counter {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--rosa-suave);
+}
+
+.final-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.final-stat-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--rosa-fuerte);
+  font-family: var(--font-elegante);
+}
+
+.final-stat-lbl {
+  font-size: 12px;
+  color: var(--texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   MENÚ FINAL DE ACTIVIDADES INTERACTIVAS
+   ========================================================================== */
+.menu-actividades-container {
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1.5px dashed var(--rosa-suave);
+  text-align: center;
+}
+
+.menu-actividades-title {
+  font-family: var(--font-cursiva);
+  font-size: 32px;
+  color: var(--rosa-oscuro);
+  margin-bottom: 4px;
+}
+
+.menu-actividades-sub {
+  font-size: 14px;
+  color: var(--texto-suave);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.menu-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid var(--borde-vidrio);
+  border-radius: 20px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(201, 24, 74, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
+  touch-action: manipulation;
+}
+
+.menu-card:active {
+  transform: scale(0.93);
+  background: #fff0f3;
+}
+
+.menu-card-icon {
+  font-size: 32px;
+  margin-bottom: 2px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+}
+
+.menu-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rosa-oscuro);
+}
+
+.menu-card-desc {
+  font-size: 12px;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+/* Botón flotante para volver al Menú desde cada actividad */
+.btn-volver-menu {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 16px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid var(--rosa-suave);
+  color: var(--rosa-fuerte);
+  padding: 8px 15px;
+  border-radius: 25px;
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: var(--font-limpia);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(201, 24, 74, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  touch-action: manipulation;
+}
+
+.btn-volver-menu:active {
+  transform: scale(0.93);
+  background: #ffe3ea;
+}
