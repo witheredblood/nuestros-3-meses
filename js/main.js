@@ -33,12 +33,21 @@ const notasRomanticas = [261.63, 329.63, 392.00, 440.00, 523.25, 659.25, 587.33,
 
 function initAudioSystem() {
   btnMusica = document.getElementById('btn-musica');
-  audioHtml = new Audio(CONFIG.archivoMusica);
-  audioHtml.loop = true;
+  try {
+    audioHtml = new Audio(encodeURI(CONFIG.archivoMusica));
+    audioHtml.preload = 'auto';
+    audioHtml.loop = true;
 
-  audioHtml.addEventListener('error', () => {
+    audioHtml.addEventListener('error', () => {
+      // Fallback a musica.mp3 si falla por nombre de archivo
+      if (!audioHtml.src.includes('musica.mp3')) {
+        audioHtml.src = 'assets/audio/musica.mp3';
+        audioHtml.load();
+      }
+    });
+  } catch (e) {
     audioHtml = null;
-  });
+  }
 }
 
 export function playCutePop(freq = 780) {

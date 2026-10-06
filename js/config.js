@@ -41,6 +41,6 @@ export const CONFIG = {
   mensajeFinal: "Gracias por estos 3 meses mágicos. Prometo seguir cuidándote, haciéndote sonreír y amándote con cada pedacito de mi alma.",
   firmaFinal: "Por muchos meses más juntos ❤️",
 
-  // Archivo de música opcional (si existe en assets/audio/musica.mp3, se reproducirá; sino, usa el sintetizador dulce)
-  archivoMusica: "assets/audio/musica.mp3"
+  // Archivo de música personalizada
+  archivoMusica: "assets/audio/Laufey - Valentine.mp3"
 };
