@@ -1,15 +1,13 @@
 /**
  * HEARTS-GAME.JS
- * Minijuego táctil: Caída masiva de corazones suaves para atrapar con el dedo.
- * Funciona internamente sin mostrar números, contadores ni barras de progreso.
- * Se gana al atrapar 10 corazones.
+ * Minijuego táctil: Caída masiva de corazones suaves acelerada por GPU.
+ * Funciona internamente sin contadores visibles. Se gana al atrapar 10 corazones.
  */
 import { CONFIG } from './config.js';
 
 let score = 0;
 let juegoActivo = false;
 let spawnInterval = null;
-let animFrames = [];
 
 const simbolosCorazones = ['💖', '💕', '💗', '💓', '💘', '💝', '🌸', '✨'];
 
@@ -24,33 +22,31 @@ export function startHeartsGame() {
   const gameArea = document.getElementById('juego-area');
   if (gameArea) gameArea.innerHTML = '';
 
-  // Oleada inicial masiva distribuida verticalmente para poblar la pantalla de inmediato
-  for (let i = 0; i < 8; i++) {
-    const yInicial = (i * 65) - 15;
-    crearCorazonCayendo(yInicial);
+  // Oleada inicial distribuida verticalmente
+  for (let i = 0; i < 6; i++) {
+    crearCorazonCayendo(i * 450);
   }
 
-  // Intervalo rápido arrojando oleadas de 2 a 3 corazones simultáneos
+  // Intervalo continuo de caída de corazones
   spawnInterval = setInterval(() => {
     if (!juegoActivo) return;
-    const lote = Math.floor(Math.random() * 2) + 2; // 2 a 3 corazones simultáneos
+    const lote = Math.floor(Math.random() * 2) + 1;
     for (let k = 0; k < lote; k++) {
-      crearCorazonCayendo(-60 - (k * 25));
+      crearCorazonCayendo(k * 180);
     }
-  }, 360);
+  }, 480);
 }
 
 export function stopHeartsGame() {
   juegoActivo = false;
   if (spawnInterval) clearInterval(spawnInterval);
-  animFrames.forEach(id => cancelAnimationFrame(id));
-  animFrames = [];
+  spawnInterval = null;
 
   const gameArea = document.getElementById('juego-area');
   if (gameArea) gameArea.innerHTML = '';
 }
 
-function crearCorazonCayendo(initialY = -60) {
+function crearCorazonCayendo(delayMs = 0) {
   const gameArea = document.getElementById('juego-area');
   if (!gameArea || !juegoActivo) return;
 
@@ -60,50 +56,40 @@ function crearCorazonCayendo(initialY = -60) {
   const emoji = simbolosCorazones[Math.floor(Math.random() * simbolosCorazones.length)];
   heart.textContent = emoji;
 
-  // Tamaño optimizado para la pantalla táctil de celular (46px - 60px)
   const size = 46 + Math.random() * 16;
   heart.style.fontSize = `${size}px`;
 
-  const maxX = (gameArea.clientWidth || 360) - size - 20;
-  const startX = 12 + Math.random() * Math.max(10, maxX);
+  const maxX = (gameArea.clientWidth || 360) - size - 24;
+  const startX = 14 + Math.random() * Math.max(10, maxX);
   heart.style.left = `${startX}px`;
-  heart.style.top = `${initialY}px`;
+  heart.style.top = `0px`;
 
-  // Velocidad de caída fluida
-  const totalDist = (gameArea.clientHeight || 640) + 80 - initialY;
-  const duration = 3000 + Math.random() * 1400;
-  const startTime = performance.now();
-
-  gameArea.appendChild(heart);
-
-  let frameId;
-  function animar(now) {
-    if (!juegoActivo || !heart.parentElement) return;
-    const progress = (now - startTime) / duration;
-
-    if (progress < 1) {
-      const currentY = initialY + progress * totalDist;
-      const sway = Math.sin(progress * Math.PI * 4) * 14;
-      heart.style.top = `${currentY}px`;
-      heart.style.left = `${startX + sway}px`;
-      frameId = requestAnimationFrame(animar);
-      animFrames.push(frameId);
-    } else {
-      if (heart.parentElement) heart.remove();
-    }
+  const dur = (3.4 + Math.random() * 1.4).toFixed(2);
+  const sway = ((Math.random() - 0.5) * 40).toFixed(1);
+  heart.style.setProperty('--fall-duration', `${dur}s`);
+  heart.style.setProperty('--sway-x', `${sway}px`);
+  if (delayMs > 0) {
+    heart.style.animationDelay = `${delayMs}ms`;
   }
-  frameId = requestAnimationFrame(animar);
-  animFrames.push(frameId);
 
-  // Evento táctil
+  heart.addEventListener('animationend', () => {
+    if (heart.parentElement) heart.remove();
+  });
+
+  // Evento táctil instantáneo
   function tocar(e) {
     e.stopPropagation();
     e.preventDefault();
-    cancelAnimationFrame(frameId);
-    atrapar(heart, startX, parseFloat(heart.style.top) || 120);
+    const rect = heart.getBoundingClientRect();
+    const areaRect = gameArea.getBoundingClientRect();
+    const x = rect.left - areaRect.left + rect.width / 2;
+    const y = rect.top - areaRect.top + rect.height / 2;
+    atrapar(heart, x, y);
   }
 
   heart.addEventListener('pointerdown', tocar);
+
+  gameArea.appendChild(heart);
 }
 
 function atrapar(heartElement, x, y) {
@@ -112,11 +98,11 @@ function atrapar(heartElement, x, y) {
 
   score++;
 
-  // Cinnamoroll da un saltito o giro en su avioncito al atrapar un corazón
+  // Cinnamoroll da un saltito o giro en su avioncito
   const cinnaAvion = document.getElementById('cinnamoroll-avion');
   if (cinnaAvion) {
     cinnaAvion.classList.remove('avion-jump');
-    void cinnaAvion.offsetWidth; // reiniciar animación
+    void cinnaAvion.offsetWidth;
     cinnaAvion.classList.add('avion-jump');
   }
 
@@ -126,7 +112,7 @@ function atrapar(heartElement, x, y) {
 
   explotarParticulas(x, y);
 
-  // Se gana silenciosamente al alcanzar 10 corazones
+  // Al alcanzar la meta
   if (score >= CONFIG.metaCorazones) {
     stopHeartsGame();
 
@@ -154,7 +140,7 @@ function explotarParticulas(x, y) {
     p.style.top = `${y}px`;
 
     const angulo = Math.random() * Math.PI * 2;
-    const dist = 32 + Math.random() * 45;
+    const dist = 30 + Math.random() * 40;
     p.style.setProperty('--dx', `${Math.cos(angulo) * dist}px`);
     p.style.setProperty('--dy', `${Math.sin(angulo) * dist}px`);
 

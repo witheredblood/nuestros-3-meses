@@ -90,13 +90,12 @@ export function initGarden(onPlantCallback, onCompleteCallback) {
         // Al terminar de florecer las 100 flores
         if (i === cantidadTotal - 1 && !jardinCompleto) {
           jardinCompleto = true;
-          iluminarJardin();
 
           if (onCompleteCallback) onCompleteCallback();
 
           setTimeout(() => {
             if (jardinModal) jardinModal.classList.add('active');
-          }, 650);
+          }, 450);
         }
       }, delay);
 
@@ -113,13 +112,6 @@ export function initGarden(onPlantCallback, onCompleteCallback) {
     if (y > 75) {
       armarJardinCompleto(x, y);
     }
-  });
-}
-
-function iluminarJardin() {
-  const flowers = document.querySelectorAll('.spawned-flower');
-  flowers.forEach(fl => {
-    fl.style.filter = 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.9))';
   });
 }
 

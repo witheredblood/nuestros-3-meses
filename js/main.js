@@ -188,8 +188,13 @@ let pantallaActual = 'portada';
 const nombresPantallas = ['portada', 'carta', 'jardin', 'juego', 'pregunta', 'final'];
 
 export function irAPantalla(nombre) {
-  vibrar(28);
+  vibrar(24);
   playCutePop(820);
+
+  // Asegurar que la música no se pause durante la transición
+  if (isPlaying && audioHtml && audioHtml.paused) {
+    audioHtml.play().catch(() => {});
+  }
 
   nombresPantallas.forEach(key => {
     const el = document.getElementById(`screen-${key}`);

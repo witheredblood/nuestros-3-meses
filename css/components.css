@@ -582,7 +582,8 @@
   justify-content: center;
   user-select: none;
   touch-action: manipulation;
-  transition: transform 0.1s linear;
+  will-change: transform, opacity;
+  animation: fallingHeartFlow var(--fall-duration, 3.8s) linear forwards;
   filter: drop-shadow(0 4px 8px rgba(236, 72, 153, 0.3));
 }
 

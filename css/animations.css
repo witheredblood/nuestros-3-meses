@@ -65,6 +65,27 @@
   }
 }
 
+/* Caída fluida de corazones acelerada por hardware GPU */
+@keyframes fallingHeartFlow {
+  0% {
+    transform: translate3d(0, -60px, 0) rotate(-6deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(var(--sway-x, 12px), 48vh, 0) rotate(8deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(calc(var(--sway-x, 12px) * -0.6), 105vh, 0) rotate(-8deg);
+    opacity: 0.8;
+  }
+}
+
 /* Cinnamoroll Cupido: inclinación y temblor sorprendido cuando intentan presionar "No" */
 @keyframes cupidoSurprise {
   0% {
