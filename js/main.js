@@ -137,6 +137,8 @@ export function irAPantalla(nombre) {
   }
 
   if (nombre === 'final') {
+    // Desbloquear menú de actividades y botones de regreso una vez completado el recorrido
+    document.body.classList.add('menu-desbloqueado');
     lanzarCelebracion();
   } else {
     detenerCelebracion();
@@ -204,9 +206,9 @@ window.addEventListener('DOMContentLoaded', () => {
   // Inicializar Jardín
   initGarden(
     () => {
-      // Al plantar flor
-      vibrar(20);
-      if (isPlaying && !audioHtml) playSynthesizedNote(400 + Math.random() * 250, 0.4);
+      // Al plantar flores
+      vibrar(22);
+      if (isPlaying && !audioHtml) playSynthesizedNote(420 + Math.random() * 250, 0.4);
     },
     () => {
       // Al completar jardín
@@ -229,7 +231,7 @@ window.addEventListener('DOMContentLoaded', () => {
     () => vibrar(25)
   );
 
-  // Enlazar botones de avance entre pantallas
+  // Enlazar botones de avance del flujo lineal
   const setupNav = (id, target) => {
     const btn = document.getElementById(id);
     if (btn) {
@@ -245,28 +247,34 @@ window.addEventListener('DOMContentLoaded', () => {
   setupNav('btn-ir-juego', 'juego');
   setupNav('btn-ir-pregunta', 'pregunta');
 
-  // Enlazar todos los elementos con atributo data-nav (tarjetas del menú y botones de regreso)
+  // Enlazar tarjetas del menú y botones de regreso (reiniciando cada actividad desde cero)
   document.querySelectorAll('[data-nav]').forEach(el => {
     el.addEventListener('pointerdown', (e) => {
       e.stopPropagation();
       const target = el.getAttribute('data-nav');
       if (target) {
-        if (target === 'juego') {
+        // Reinicio completo de la actividad seleccionada
+        if (target === 'carta') {
+          resetEnvelope();
+        } else if (target === 'jardin') {
+          resetGarden();
+        } else if (target === 'juego') {
           resetHeartsGame();
-        }
-        if (target === 'pregunta') {
+        } else if (target === 'pregunta') {
           resetQuestion();
         }
+
         irAPantalla(target);
       }
     });
   });
 
-  // Botón de reiniciar experiencia
+  // Botón de reiniciar experiencia completa
   const btnReiniciar = document.getElementById('btn-reiniciar');
   if (btnReiniciar) {
     btnReiniciar.addEventListener('pointerdown', (e) => {
       e.stopPropagation();
+      document.body.classList.remove('menu-desbloqueado');
       resetEnvelope();
       resetGarden();
       resetHeartsGame();

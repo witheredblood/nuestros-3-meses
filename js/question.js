@@ -1,8 +1,9 @@
 /**
  * QUESTION.JS
  * Lógica de la pregunta imposible:
- * El botón "No" huye a posiciones aleatorias seguras dentro de la pantalla del celular
- * mientras el botón "Sí" crece de tamaño con cada intento.
+ * El botón "No" huye a cualquier parte de la pantalla visible del celular
+ * (arriba, abajo, izquierda, derecha, esquinas), sin salirse de los límites
+ * y verificando estrictamente que JAMÁS se solape con el botón "Sí" (con margen de seguridad).
  */
 import { CONFIG } from './config.js';
 
@@ -12,9 +13,9 @@ let escalaBtnSi = 1;
 export function initQuestion(onYesCallback, onNoAttemptCallback) {
   const btnSi = document.getElementById('btn-si');
   const btnNo = document.getElementById('btn-no');
-  const container = document.getElementById('pregunta-container');
+  const screenPregunta = document.getElementById('screen-pregunta');
 
-  if (!btnSi || !btnNo || !container) return;
+  if (!btnSi || !btnNo || !screenPregunta) return;
 
   function escaparBotonNo(e) {
     if (e) {
@@ -30,40 +31,45 @@ export function initQuestion(onYesCallback, onNoAttemptCallback) {
     const frase = frases[intentosNo % frases.length];
     btnNo.textContent = frase;
 
-    // Hacer crecer el botón SÍ de manera gradual y atractiva
+    // Hacer crecer el botón SÍ de manera gradual
     escalaBtnSi = Math.min(2.1, escalaBtnSi + 0.12);
     btnSi.style.transform = `scale(${escalaBtnSi})`;
     btnSi.style.boxShadow = `0 ${8 + intentosNo * 2}px ${24 + intentosNo * 4}px rgba(255, 77, 109, ${0.4 + intentosNo * 0.05})`;
 
-    // Calcular dimensiones y coordenadas del botón SÍ dentro del contenedor
-    const contRect = container.getBoundingClientRect();
+    // Obtener dimensiones de la pantalla completa del celular y del botón Sí
+    const screenRect = screenPregunta.getBoundingClientRect();
     const siRect = btnSi.getBoundingClientRect();
     const btnRect = btnNo.getBoundingClientRect();
 
-    const siRelLeft = siRect.left - contRect.left;
-    const siRelTop = siRect.top - contRect.top;
+    // Coordenadas relativas del botón Sí dentro de la pantalla completa
+    const siRelLeft = siRect.left - screenRect.left;
+    const siRelTop = siRect.top - screenRect.top;
     const siRelRight = siRelLeft + siRect.width;
     const siRelBottom = siRelTop + siRect.height;
 
-    // Margen de seguridad estricto para evitar cualquier roce o solapamiento
-    const MARGEN = 28;
+    // Margen de seguridad estricto para que en ningún momento se toquen o solapen
+    const MARGEN = 34;
 
-    // Límites seguros dentro del contenedor para no desbordar la pantalla del celular
-    const maxLeft = Math.max(10, contRect.width - btnRect.width - 15);
-    const maxTop = Math.max(10, contRect.height - btnRect.height - 15);
+    // Límites para abarcar TODA la pantalla visible del celular
+    const minLeft = 14;
+    const maxLeft = Math.max(minLeft, screenRect.width - btnRect.width - 14);
+    
+    // Evitar barra superior extrema (para no tapar notch o botón volver)
+    const minTop = 65;
+    const maxTop = Math.max(minTop, screenRect.height - btnRect.height - 30);
 
-    let nuevoLeft = 10;
-    let nuevoTop = 10;
+    let nuevoLeft = minLeft;
+    let nuevoTop = maxTop;
     let encontroPosicion = false;
 
-    // Intentar hasta 70 combinaciones aleatorias que respeten el margen
-    for (let intento = 0; intento < 70; intento++) {
-      const candLeft = 10 + Math.random() * maxLeft;
-      const candTop = 10 + Math.random() * maxTop;
+    // Probar hasta 80 posiciones aleatorias por toda la pantalla
+    for (let intento = 0; intento < 80; intento++) {
+      const candLeft = minLeft + Math.random() * (maxLeft - minLeft);
+      const candTop = minTop + Math.random() * (maxTop - minTop);
       const candRight = candLeft + btnRect.width;
       const candBottom = candTop + btnRect.height;
 
-      // Comprobar si hay solapamiento con la caja ampliada del botón SÍ
+      // Comprobar que NO haya colisión con el botón Sí (+ margen de seguridad)
       const solapado = !(
         candRight < (siRelLeft - MARGEN) ||
         candLeft > (siRelRight + MARGEN) ||
@@ -79,14 +85,10 @@ export function initQuestion(onYesCallback, onNoAttemptCallback) {
       }
     }
 
-    // Si por el tamaño del botón SÍ no se halló por azar, enviarlo a la zona más despejada
+    // Si no encontró por azar, enviarlo a la esquina más opuesta a la ubicación del botón Sí
     if (!encontroPosicion) {
-      if (siRelTop > contRect.height / 2) {
-        nuevoTop = 10;
-      } else {
-        nuevoTop = maxTop;
-      }
-      nuevoLeft = (siRelLeft > contRect.width / 2) ? 10 : maxLeft;
+      nuevoTop = (siRelTop > screenRect.height / 2) ? minTop : maxTop;
+      nuevoLeft = (siRelLeft > screenRect.width / 2) ? minLeft : maxLeft;
     }
 
     btnNo.style.bottom = 'auto';
@@ -120,7 +122,7 @@ export function resetQuestion() {
   }
   if (btnNo) {
     btnNo.textContent = 'No 🙈';
-    btnNo.style.bottom = '25px';
+    btnNo.style.bottom = '45px';
     btnNo.style.left = '50%';
     btnNo.style.top = 'auto';
     btnNo.style.transform = 'translateX(-50%)';
