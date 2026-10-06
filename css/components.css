@@ -387,8 +387,12 @@
   position: absolute;
   pointer-events: none;
   transform-origin: bottom center;
-  animation: crecerFlor 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+  will-change: transform, opacity;
+  animation: crecerFlor 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.spawned-flower img {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.08));
 }
 
 .jardin-modal {
@@ -411,7 +415,7 @@
 }
 
 /* ==========================================================================
-   MINIJUEGO: ATRAPA LOS CORAZONES
+   MINIJUEGO: ATRAPA LOS CORAZONES (SIN CONTADORES NI NÚMEROS)
    ========================================================================== */
 #screen-juego {
   position: absolute;
@@ -438,25 +442,17 @@
   gap: 6px;
 }
 
-.juego-score-badge {
+.juego-hint-badge {
   background: var(--blanco-vidrio);
   border: 1.5px solid var(--borde-vidrio);
-  padding: 8px 22px;
+  padding: 8px 24px;
   border-radius: 30px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--rosa-fuerte);
   box-shadow: 0 4px 15px rgba(225, 29, 72, 0.15);
   backdrop-filter: blur(8px);
-}
-
-.juego-progress-track {
-  width: 180px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(244, 63, 94, 0.2);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .juego-progress-bar {

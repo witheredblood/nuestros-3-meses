@@ -1,6 +1,8 @@
 /**
  * HEARTS-GAME.JS
- * Minijuego táctil: Caída de corazones suaves para atrapar con el dedo.
+ * Minijuego táctil: Caída masiva de corazones suaves para atrapar con el dedo.
+ * Funciona internamente sin mostrar números, contadores ni barras de progreso.
+ * Se gana al atrapar 10 corazones.
  */
 import { CONFIG } from './config.js';
 
@@ -12,14 +14,6 @@ let animFrames = [];
 const simbolosCorazones = ['💖', '💕', '💗', '💓', '💘', '💝', '🌸', '✨'];
 
 export function initHeartsGame(onCatchCallback, onWinCallback) {
-  // Inicialización de contenedores y eventos
-  const gameArea = document.getElementById('juego-area');
-  const targetEl = document.getElementById('game-target');
-
-  if (targetEl) {
-    targetEl.textContent = CONFIG.metaCorazones;
-  }
-
   window._heartsCallbacks = { onCatchCallback, onWinCallback };
 }
 
@@ -30,20 +24,20 @@ export function startHeartsGame() {
   const gameArea = document.getElementById('juego-area');
   if (gameArea) gameArea.innerHTML = '';
 
-  // Oleada inicial masiva distribuida verticalmente para que la pantalla esté llena de inmediato
-  for (let i = 0; i < 7; i++) {
-    const yInicial = (i * 65) - 10;
+  // Oleada inicial masiva distribuida verticalmente para poblar la pantalla de inmediato
+  for (let i = 0; i < 8; i++) {
+    const yInicial = (i * 65) - 15;
     crearCorazonCayendo(yInicial);
   }
 
-  // Intervalo rápido arrojando oleadas de 2 a 3 corazones a la vez
+  // Intervalo rápido arrojando oleadas de 2 a 3 corazones simultáneos
   spawnInterval = setInterval(() => {
     if (!juegoActivo) return;
     const lote = Math.floor(Math.random() * 2) + 2; // 2 a 3 corazones simultáneos
     for (let k = 0; k < lote; k++) {
       crearCorazonCayendo(-60 - (k * 25));
     }
-  }, 380);
+  }, 360);
 }
 
 export function stopHeartsGame() {
@@ -77,7 +71,7 @@ function crearCorazonCayendo(initialY = -60) {
 
   // Velocidad de caída fluida
   const totalDist = (gameArea.clientHeight || 640) + 80 - initialY;
-  const duration = 3200 + Math.random() * 1400;
+  const duration = 3000 + Math.random() * 1400;
   const startTime = performance.now();
 
   gameArea.appendChild(heart);
@@ -101,7 +95,7 @@ function crearCorazonCayendo(initialY = -60) {
   frameId = requestAnimationFrame(animar);
   animFrames.push(frameId);
 
-  // Evento táctil inmediato
+  // Evento táctil
   function tocar(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -117,15 +111,6 @@ function atrapar(heartElement, x, y) {
   heartElement.remove();
 
   score++;
-  const scoreEl = document.getElementById('game-score');
-  const progressEl = document.getElementById('game-progress');
-  const juegoModal = document.getElementById('juego-modal');
-
-  if (scoreEl) scoreEl.textContent = score;
-  if (progressEl) {
-    const pct = Math.min(100, (score / CONFIG.metaCorazones) * 100);
-    progressEl.style.width = `${pct}%`;
-  }
 
   if (window._heartsCallbacks?.onCatchCallback) {
     window._heartsCallbacks.onCatchCallback();
@@ -133,6 +118,7 @@ function atrapar(heartElement, x, y) {
 
   explotarParticulas(x, y);
 
+  // Se gana silenciosamente al alcanzar 10 corazones
   if (score >= CONFIG.metaCorazones) {
     stopHeartsGame();
 
@@ -140,9 +126,10 @@ function atrapar(heartElement, x, y) {
       window._heartsCallbacks.onWinCallback();
     }
 
+    const juegoModal = document.getElementById('juego-modal');
     setTimeout(() => {
       if (juegoModal) juegoModal.classList.add('active');
-    }, 500);
+    }, 450);
   }
 }
 
@@ -172,11 +159,6 @@ export function resetHeartsGame() {
   score = 0;
   stopHeartsGame();
 
-  const scoreEl = document.getElementById('game-score');
-  const progressEl = document.getElementById('game-progress');
   const juegoModal = document.getElementById('juego-modal');
-
-  if (scoreEl) scoreEl.textContent = '0';
-  if (progressEl) progressEl.style.width = '0%';
   if (juegoModal) juegoModal.classList.remove('active');
 }
