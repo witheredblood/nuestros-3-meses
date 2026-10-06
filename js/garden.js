@@ -31,36 +31,36 @@ export function initGarden(onPlantCallback, onCompleteCallback) {
     const areaWidth = jardinArea.clientWidth || 360;
     const areaHeight = jardinArea.clientHeight || 640;
 
-    // 100 flores llenando por completo la pantalla del celular
-    const cantidadTotal = 100; 
+    // 80 flores optimizadas y más frondosas para máxima fluidez y belleza
+    const cantidadTotal = 80; 
 
-    // Distribución por toda la superficie (10 x 10 con variación orgánica)
+    // Distribución orgánica por la pantalla (8 filas x 10 columnas)
     const posiciones = [];
-    const filas = 10;
+    const filas = 8;
     const columnas = 10;
 
     for (let r = 0; r < filas; r++) {
       for (let c = 0; c < columnas; c++) {
-        const celdaW = (areaWidth - 30) / columnas;
-        const celdaH = (areaHeight - 120) / filas;
+        const celdaW = (areaWidth - 24) / columnas;
+        const celdaH = (areaHeight - 110) / filas;
 
-        const posX = 15 + c * celdaW + (Math.random() * 0.85 + 0.08) * celdaW;
-        const posY = 85 + r * celdaH + (Math.random() * 0.85 + 0.08) * celdaH;
+        const posX = 12 + c * celdaW + (Math.random() * 0.82 + 0.09) * celdaW;
+        const posY = 80 + r * celdaH + (Math.random() * 0.82 + 0.09) * celdaH;
 
         posiciones.push({ x: posX, y: posY });
       }
     }
 
-    // Ordenar de adentro hacia afuera desde el punto de toque (efecto onda floral)
+    // Ordenar desde el punto de toque (onda expansiva)
     posiciones.sort((a, b) => {
       const distA = Math.hypot(a.x - toqueX, a.y - toqueY);
       const distB = Math.hypot(b.x - toqueX, b.y - toqueY);
       return distA - distB;
     });
 
-    // Florecimiento escalonado optimizado para rendimiento en móviles (en micro-lotes de 2-3 flores)
+    // Florecimiento escalonado optimizado a 60fps (en lotes de 4 flores cada 26ms)
     for (let i = 0; i < cantidadTotal; i++) {
-      const delay = Math.floor(i / 3) * 26; // 3 flores por lote cada 26ms = ~850ms en total
+      const delay = Math.floor(i / 4) * 26; // ~520ms en total
 
       const tid = setTimeout(() => {
         floresPlantadas++;
@@ -76,18 +76,18 @@ export function initGarden(onPlantCallback, onCompleteCallback) {
         const imgEl = document.createElement('img');
         imgEl.src = svgSrc;
         imgEl.alt = 'Flor';
-        imgEl.style.width = '44px';
-        imgEl.style.height = '62px';
+        imgEl.style.width = '48px';
+        imgEl.style.height = '66px';
         imgEl.draggable = false;
 
-        // Escalas orgánicas
-        const scale = 0.65 + Math.random() * 0.45;
+        // Escalas más grandes y frondosas
+        const scale = 0.78 + Math.random() * 0.42;
         flowerDiv.style.transform = `scale(${scale})`;
 
         flowerDiv.appendChild(imgEl);
         jardinArea.appendChild(flowerDiv);
 
-        // Al terminar de florecer las 100 flores
+        // Al terminar de florecer las 80 flores
         if (i === cantidadTotal - 1 && !jardinCompleto) {
           jardinCompleto = true;
 
@@ -95,7 +95,7 @@ export function initGarden(onPlantCallback, onCompleteCallback) {
 
           setTimeout(() => {
             if (jardinModal) jardinModal.classList.add('active');
-          }, 450);
+          }, 400);
         }
       }, delay);
 
