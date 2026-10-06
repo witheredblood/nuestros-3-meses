@@ -91,6 +91,14 @@ export function initQuestion(onYesCallback, onNoAttemptCallback) {
       nuevoLeft = (siRelLeft > screenRect.width / 2) ? minLeft : maxLeft;
     }
 
+    // Cinnamoroll Cupido se inclina y sacude sorprendido
+    const cinnaCupido = document.getElementById('cinnamoroll-cupido');
+    if (cinnaCupido) {
+      cinnaCupido.classList.remove('cupido-surprised');
+      void cinnaCupido.offsetWidth; // reiniciar animación
+      cinnaCupido.classList.add('cupido-surprised');
+    }
+
     btnNo.style.bottom = 'auto';
     btnNo.style.transform = 'none';
     btnNo.style.left = `${Math.round(nuevoLeft)}px`;
@@ -105,8 +113,38 @@ export function initQuestion(onYesCallback, onNoAttemptCallback) {
   // Al pulsar Sí
   btnSi.addEventListener('pointerdown', (e) => {
     e.stopPropagation();
+
+    // Cinnamoroll Cupido salta y lanza corazones
+    const cinnaCupido = document.getElementById('cinnamoroll-cupido');
+    if (cinnaCupido) {
+      cinnaCupido.classList.remove('cupido-surprised');
+      cinnaCupido.classList.add('cupido-celebrate');
+    }
+    lanzarCorazonesCupido();
+
     if (onYesCallback) onYesCallback();
   });
+}
+
+function lanzarCorazonesCupido() {
+  const container = document.getElementById('screen-pregunta');
+  if (!container) return;
+
+  for (let i = 0; i < 12; i++) {
+    const h = document.createElement('div');
+    h.className = 'mini-pop';
+    h.textContent = ['💘', '💖', '💕', '✨'][Math.floor(Math.random() * 4)];
+    h.style.left = '50%';
+    h.style.top = '36%';
+
+    const angulo = (Math.PI / 6) + Math.random() * (Math.PI * 2 / 3);
+    const dist = 50 + Math.random() * 90;
+    h.style.setProperty('--dx', `${Math.cos(angulo) * dist}px`);
+    h.style.setProperty('--dy', `${-Math.sin(angulo) * dist}px`);
+
+    container.appendChild(h);
+    setTimeout(() => h.remove(), 700);
+  }
 }
 
 export function resetQuestion() {

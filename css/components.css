@@ -1,33 +1,34 @@
 /* ==========================================================================
    COMPONENTS.CSS
-   Botones, Tarjetas, Sobre, Carta, Jardín, Juego y Pregunta Imposible
+   Cinnamoroll, Glassmorphism, Sobre, Jardín, Juego, Pregunta y Menú
    ========================================================================== */
 
 /* ==========================================================================
-   BOTONES ROMÁNTICOS
+   BOTONES KAWAII / ROMÁNTICOS
    ========================================================================== */
 .btn-romantic {
-  background: linear-gradient(135deg, var(--rosa-vibrante) 0%, var(--rosa-fuerte) 100%);
+  background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
   color: var(--texto-blanco);
   border: none;
   outline: none;
-  padding: 16px 30px;
-  font-size: 18px;
+  padding: 15px 32px;
+  font-size: 17.5px;
   font-weight: 700;
-  font-family: var(--font-limpia);
+  font-family: var(--font-kawaii);
   border-radius: var(--radius-boton);
-  box-shadow: var(--sombra-boton);
+  box-shadow: var(--sombra-boton-rosa);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 54px;
-  min-width: 200px;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease;
+  min-height: 52px;
+  min-width: 210px;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, filter 0.22s ease;
   position: relative;
   overflow: hidden;
   touch-action: manipulation;
+  z-index: 10;
 }
 
 .btn-romantic::after {
@@ -37,27 +38,32 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
+  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.45) 50%, transparent 60%);
   transform: translateX(-100%);
-  animation: brilloBoton 4s infinite;
+  animation: brilloBoton 3.8s infinite;
   pointer-events: none;
 }
 
 .btn-romantic:active {
-  transform: scale(0.95);
-  filter: brightness(0.95);
+  transform: scale(0.93);
+  filter: brightness(0.96);
+}
+
+.btn-celeste {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  box-shadow: var(--sombra-boton);
 }
 
 /* ==========================================================================
-   TARJETAS GLASSMORPHISM
+   TARJETAS GLASSMORPHISM SANRIO
    ========================================================================== */
 .glass-card {
   background: var(--blanco-vidrio);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1.5px solid var(--borde-vidrio);
   border-radius: var(--radius-card);
-  box-shadow: var(--sombra-romantica);
+  box-shadow: var(--sombra-celeste);
   width: 100%;
   padding: 24px 20px;
   text-align: center;
@@ -65,58 +71,91 @@
 }
 
 .badge-romantico {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.88);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 13.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 18px;
+  border-radius: var(--radius-badge);
+  font-size: 13px;
   font-weight: 700;
-  color: var(--rosa-fuerte);
-  border: 1px solid var(--rosa-suave);
-  margin-bottom: 12px;
+  color: var(--celeste-sanrio);
+  border: 1px solid var(--borde-celeste);
+  margin-bottom: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  box-shadow: 0 4px 10px rgba(255, 117, 143, 0.15);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
 }
 
 /* ==========================================================================
-   PORTADA
+   ESTELA TÁCTIL (TOUCH SPARKLE TRAIL)
+   ========================================================================== */
+.touch-sparkle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 999;
+  font-size: 16px;
+  animation: touchSparkleFade 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   SOMBRA BASE PARA PERSONAJES FLOTANTES
+   ========================================================================== */
+.cinna-shadow {
+  width: 90px;
+  height: 14px;
+  background: radial-gradient(ellipse at center, rgba(30, 58, 95, 0.25) 0%, rgba(30, 58, 95, 0) 70%);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: cinnamorollShadow 2.8s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   SECCIÓN 1: PORTADA CON CINNAMOROLL FLOR
    ========================================================================== */
 #screen-portada {
   text-align: center;
   justify-content: space-around;
-  padding-top: 40px;
+  padding-top: 36px;
+}
+
+.portada-header {
+  margin-top: 10px;
 }
 
 .portada-title {
-  font-family: var(--font-cursiva);
-  font-size: 42px;
-  color: var(--rosa-oscuro);
-  line-height: 1.15;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
-  margin-bottom: 6px;
+  font-family: var(--font-kawaii);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  line-height: 1.18;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
 }
 
 .portada-name {
-  font-family: var(--font-elegante);
-  font-size: 26px;
-  font-style: italic;
-  color: var(--rosa-fuerte);
-  margin-bottom: 8px;
+  font-family: var(--font-cursiva);
+  font-size: 32px;
+  color: var(--rosa-vibrante);
+  margin-bottom: 6px;
 }
 
 .portada-quote {
-  font-size: 15.5px;
+  font-size: 15px;
   color: var(--texto-suave);
   line-height: 1.45;
-  max-width: 300px;
+  max-width: 310px;
   margin: 0 auto;
+  font-weight: 600;
 }
 
-.bouquet-wrapper {
+/* Composición de Portada: Cinnamoroll con la flor junto al ramo */
+.portada-stage {
   position: relative;
-  width: 230px;
-  height: 230px;
+  width: 100%;
+  max-width: 320px;
+  height: 250px;
   margin: 10px auto;
   display: flex;
   align-items: center;
@@ -125,27 +164,68 @@
 
 .bouquet-aura {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255, 182, 193, 0.5) 0%, rgba(255, 229, 236, 0) 70%);
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.6) 0%, rgba(255, 241, 242, 0) 70%);
   border-radius: 50%;
   animation: latidoAura 3s infinite ease-in-out;
+}
+
+.cinna-flor-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 175px;
+  z-index: 5;
+  animation: cinnamorollFloat 3.2s infinite ease-in-out;
+}
+
+.cinna-flor-img {
+  width: 100%;
+  filter: drop-shadow(0 10px 18px rgba(56, 189, 248, 0.28));
+}
+
+.bouquet-wrapper-portada {
+  position: absolute;
+  bottom: 0px;
+  right: 15px;
+  width: 170px;
+  height: 170px;
+  z-index: 4;
 }
 
 .bouquet-img {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 12px 20px rgba(201, 24, 74, 0.22));
+  filter: drop-shadow(0 10px 20px rgba(236, 72, 153, 0.22));
   transform-origin: bottom center;
   animation: florecerRamo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ==========================================================================
-   CARTA DE AMOR & SOBRE
+   SECCIÓN 2: CARTA DE AMOR & CINNAMOROLL FELIZ
    ========================================================================== */
 #screen-carta {
   justify-content: center;
-  gap: 16px;
+  gap: 14px;
+}
+
+.carta-stage {
+  position: relative;
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+/* Cinnamoroll pequeñito feliz asomándose sobre la carta */
+.cinna-carta-peeker {
+  position: absolute;
+  top: -62px;
+  right: 12px;
+  width: 95px;
+  z-index: 3;
+  animation: peekAnimation 2.8s infinite ease-in-out;
+  filter: drop-shadow(0 6px 14px rgba(56, 189, 248, 0.25));
 }
 
 .envelope-container {
@@ -167,10 +247,10 @@
   position: relative;
   width: 100%;
   height: 200px;
-  background: var(--rosa-pastel);
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 12px 25px rgba(201, 24, 74, 0.15);
-  border: 2px solid #f472b6;
+  background: #dbeafe;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 14px 30px rgba(14, 116, 144, 0.16);
+  border: 2px solid #93c5fd;
 }
 
 .envelope-flap {
@@ -181,7 +261,7 @@
   height: 0;
   border-left: 158px solid transparent;
   border-right: 158px solid transparent;
-  border-top: 110px solid #f472b6;
+  border-top: 110px solid #93c5fd;
   transform-origin: top;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
@@ -198,11 +278,11 @@
   left: 0;
   width: 0;
   height: 0;
-  border-left: 158px solid #fda4af;
-  border-right: 158px solid #fda4af;
-  border-bottom: 110px solid #fb7185;
+  border-left: 158px solid #bfdbfe;
+  border-right: 158px solid #bfdbfe;
+  border-bottom: 110px solid #93c5fd;
   border-top: 90px solid transparent;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 18px 18px;
   z-index: 4;
   pointer-events: none;
 }
@@ -214,17 +294,17 @@
   transform: translate(-50%, -50%);
   width: 52px;
   height: 52px;
-  background: radial-gradient(circle, #e11d48 0%, #9f1239 100%);
+  background: radial-gradient(circle, #f472b6 0%, #db2777 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-size: 24px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
   z-index: 6;
   transition: opacity 0.4s ease, transform 0.4s ease;
-  border: 2px dashed #ffe4e6;
+  border: 2px dashed #fce7f3;
 }
 
 .envelope-container.open .envelope-stamp {
@@ -237,18 +317,18 @@
   top: 15px;
   left: 12px;
   right: 12px;
-  background: #fffdfa;
-  background-image: linear-gradient(#fdf2f8 1px, transparent 1px);
+  background: #ffffff;
+  background-image: linear-gradient(#f0f9ff 1px, transparent 1px);
   background-size: 100% 24px;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 20px 16px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-  border: 1px solid #fecdd3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid #bae6fd;
   z-index: 2;
   transition: transform 0.8s cubic-bezier(0.34, 1.3, 0.64, 1);
   max-height: 180px;
   overflow: hidden;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .envelope-container.open .letter-paper {
@@ -258,15 +338,16 @@
   z-index: 7;
   opacity: 1;
   overflow-y: auto;
-  box-shadow: 0 16px 35px rgba(201, 24, 74, 0.22);
+  box-shadow: 0 16px 36px rgba(14, 116, 144, 0.22);
 }
 
 .letter-header {
-  font-family: var(--font-cursiva);
-  font-size: 26px;
-  color: var(--rosa-fuerte);
+  font-family: var(--font-kawaii);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--celeste-sanrio);
   margin-bottom: 8px;
-  border-bottom: 1px dashed var(--rosa-suave);
+  border-bottom: 1px dashed #bae6fd;
   padding-bottom: 4px;
   text-align: left;
 }
@@ -274,7 +355,7 @@
 .letter-content {
   font-size: 15.5px;
   line-height: 24px;
-  color: #4a1d24;
+  color: #1e3a5f;
   text-align: left;
   min-height: 140px;
   white-space: pre-line;
@@ -293,7 +374,7 @@
 
 .letter-footer {
   font-family: var(--font-cursiva);
-  font-size: 22px;
+  font-size: 24px;
   color: var(--rosa-fuerte);
   text-align: right;
   margin-top: 12px;
@@ -302,13 +383,14 @@
 .envelope-hint {
   text-align: center;
   font-size: 14px;
-  color: var(--rosa-fuerte);
-  font-weight: 600;
+  color: var(--celeste-sanrio);
+  font-weight: 700;
+  font-family: var(--font-kawaii);
   animation: pulsoTexto 1.8s infinite ease-in-out;
 }
 
 /* ==========================================================================
-   JARDÍN QUE FLORECE AL TOCAR
+   SECCIÓN 3: JARDÍN DE FLORES & CINNAMOROLL GLOBOS
    ========================================================================== */
 #screen-jardin {
   position: absolute;
@@ -319,7 +401,7 @@
   padding: 0;
   overflow: hidden;
   touch-action: none;
-  background: linear-gradient(180deg, #fdf2f8 0%, #fef3c7 65%, #dcfce7 88%, #bbf7d0 100%);
+  background: linear-gradient(180deg, #d8eeff 0%, #e0f2fe 40%, #ecfdf5 75%, #d1fae5 100%);
 }
 
 .jardin-header {
@@ -336,14 +418,15 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 8px 20px;
   border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  font-size: 15.5px;
   font-weight: 700;
+  font-family: var(--font-kawaii);
   color: #065f46;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.35);
   backdrop-filter: blur(8px);
 }
 
@@ -352,25 +435,20 @@
   color: #047857;
   margin-top: 6px;
   font-weight: 700;
-  text-shadow: 0 1px 4px rgba(255,255,255,0.9);
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
   animation: pulsoTexto 2s infinite;
 }
 
-.jardin-progress-bar {
-  width: 140px;
-  height: 6px;
-  background: rgba(0,0,0,0.08);
-  border-radius: 10px;
-  margin: 6px auto 0;
-  overflow: hidden;
-}
-
-.jardin-progress-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #34d399, #10b981);
-  border-radius: 10px;
-  transition: width 0.3s ease;
+/* Cinnamoroll con los globos flotando en el cielo del jardín */
+.cinna-jardin-globos {
+  position: absolute;
+  top: max(80px, calc(env(safe-area-inset-top) + 65px));
+  right: 20px;
+  width: 110px;
+  z-index: 20;
+  pointer-events: none;
+  animation: cinnamorollFloat 3.4s infinite ease-in-out;
+  filter: drop-shadow(0 10px 18px rgba(56, 189, 248, 0.35));
 }
 
 #jardin-interactive-area {
@@ -380,7 +458,7 @@
   width: 100%;
   height: 100%;
   z-index: 10;
-  cursor: crosshair;
+  cursor: pointer;
 }
 
 .spawned-flower {
@@ -415,7 +493,7 @@
 }
 
 /* ==========================================================================
-   MINIJUEGO: ATRAPA LOS CORAZONES (SIN CONTADORES NI NÚMEROS)
+   SECCIÓN 4: JUEGO DE CORAZONES & CINNAMOROLL AVIONCITO
    ========================================================================== */
 #screen-juego {
   position: absolute;
@@ -426,12 +504,12 @@
   padding: 0;
   overflow: hidden;
   touch-action: none;
-  background: linear-gradient(180deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%);
+  background: linear-gradient(180deg, #cbe3fb 0%, #dbeafe 45%, #fff1f2 100%);
 }
 
 .juego-hud {
   position: absolute;
-  top: max(16px, env(safe-area-inset-top));
+  top: max(14px, env(safe-area-inset-top));
   left: 16px;
   right: 16px;
   z-index: 30;
@@ -443,30 +521,48 @@
 }
 
 .juego-hint-badge {
-  background: var(--blanco-vidrio);
+  background: var(--blanco-vidrio-fuerte);
   border: 1.5px solid var(--borde-vidrio);
-  padding: 8px 24px;
+  padding: 7px 22px;
   border-radius: 30px;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
-  color: var(--rosa-fuerte);
-  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.15);
+  font-family: var(--font-kawaii);
+  color: var(--celeste-sanrio);
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-.juego-progress-bar {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #f43f5e, #be123c);
-  border-radius: 10px;
-  transition: width 0.25s ease;
+/* Cinnamoroll en el avioncito patrullando el cielo */
+.cinna-avion-wrapper {
+  position: absolute;
+  top: max(72px, calc(env(safe-area-inset-top) + 56px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 90px;
+  z-index: 25;
+  pointer-events: none;
 }
 
-.juego-hint {
-  font-size: 13px;
-  color: var(--texto-suave);
-  font-weight: 600;
+.cinna-avion-patrol {
+  width: 100%;
+  height: 100%;
+  animation: avionPatrol 4.8s infinite ease-in-out;
+}
+
+.cinna-avion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(14, 116, 144, 0.3));
+  transition: transform 0.2s ease;
+}
+
+/* Salto o giro de Cinnamoroll cuando atrapa un corazón */
+.cinna-avion-img.avion-jump {
+  animation: avionJumpSpin 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 #juego-area {
@@ -487,7 +583,7 @@
   user-select: none;
   touch-action: manipulation;
   transition: transform 0.1s linear;
-  filter: drop-shadow(0 4px 8px rgba(225, 29, 72, 0.25));
+  filter: drop-shadow(0 4px 8px rgba(236, 72, 153, 0.3));
 }
 
 .falling-heart:active {
@@ -497,9 +593,9 @@
 .mini-pop {
   position: absolute;
   pointer-events: none;
-  font-size: 18px;
+  font-size: 20px;
   animation: volarParticula 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  z-index: 25;
+  z-index: 28;
 }
 
 .juego-modal {
@@ -522,45 +618,82 @@
 }
 
 /* ==========================================================================
-   LA PREGUNTA IMPOSIBLE
+   SECCIÓN 5: LA PREGUNTA IMPOSIBLE & CINNAMOROLL CUPIDO
    ========================================================================== */
 #screen-pregunta {
   justify-content: space-around;
   text-align: center;
-  padding: 36px 20px;
+  padding: 30px 20px;
   position: relative;
   overflow: hidden;
 }
 
+.pregunta-header {
+  margin-top: 15px;
+}
+
 .pregunta-titulo {
-  font-family: var(--font-cursiva);
-  font-size: 38px;
-  color: var(--rosa-oscuro);
+  font-family: var(--font-kawaii);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--texto-oscuro);
   line-height: 1.25;
-  margin-bottom: 12px;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
 }
 
 .pregunta-subtitulo {
-  font-size: 15.5px;
+  font-size: 15px;
   color: var(--texto-suave);
   font-weight: 600;
   max-width: 300px;
   margin: 0 auto;
 }
 
+/* Cinnamoroll Cupido mirando la pregunta */
+.cinna-cupido-stage {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  height: 160px;
+  margin: 5px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cinna-cupido-img {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(236, 72, 153, 0.35));
+  animation: cinnamorollFloat 3s infinite ease-in-out;
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+}
+
+.cinna-cupido-img.cupido-surprised {
+  animation: cupidoSurprise 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.cinna-cupido-img.cupido-celebrate {
+  animation: cupidoCelebrate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
 .pregunta-ring-img {
-  width: 95px;
-  height: 95px;
-  margin: 10px auto;
-  filter: drop-shadow(0 6px 14px rgba(245, 158, 11, 0.3));
+  width: 52px;
+  height: 52px;
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.3));
   animation: brilloAnillo 2.5s infinite ease-in-out;
 }
 
 .pregunta-actions {
   position: relative;
   width: 100%;
-  min-height: 160px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -574,35 +707,35 @@
 }
 
 #btn-no {
-  background: #f1f5f9;
+  background: rgba(255, 255, 255, 0.95);
   color: #64748b;
-  border: 1px solid #cbd5e1;
+  border: 1.5px solid #cbd5e1;
   border-radius: 40px;
-  padding: 10px 22px;
+  padding: 10px 24px;
   font-size: 15px;
   font-weight: 700;
-  font-family: var(--font-limpia);
+  font-family: var(--font-kawaii);
   cursor: pointer;
   position: absolute;
-  bottom: 45px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  transition: top 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+  transition: top 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              left 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
               transform 0.15s ease;
   touch-action: none;
   z-index: 25;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
 }
 
 /* ==========================================================================
-   FINAL / CELEBRACIÓN
+   SECCIÓN 6: FINAL / CELEBRACIÓN & CINNAMOROLL PASTEL
    ========================================================================== */
 #screen-final {
   justify-content: space-around;
   text-align: center;
-  padding: 36px 20px;
+  padding: 30px 20px;
 }
 
 .final-badge {
@@ -612,32 +745,34 @@
   color: #be185d;
   padding: 6px 18px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
-  margin-bottom: 8px;
+  font-family: var(--font-kawaii);
+  margin-bottom: 6px;
 }
 
 .final-title {
-  font-family: var(--font-cursiva);
-  font-size: 46px;
-  color: var(--rosa-oscuro);
-  line-height: 1.15;
+  font-family: var(--font-kawaii);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  line-height: 1.2;
   margin-bottom: 6px;
 }
 
 .final-card {
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--blanco-vidrio-fuerte);
   border-radius: var(--radius-card);
-  padding: 24px 20px;
+  padding: 22px 18px;
   border: 1.5px solid var(--borde-vidrio);
-  box-shadow: var(--sombra-romantica);
-  margin: 12px 0;
+  box-shadow: var(--sombra-celeste);
+  margin: 10px 0;
 }
 
 .final-card-text {
-  font-size: 16.5px;
-  line-height: 1.6;
-  color: #4a1d24;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #1e3a5f;
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -645,16 +780,16 @@
 .final-signature {
   font-family: var(--font-cursiva);
   font-size: 26px;
-  color: var(--rosa-fuerte);
+  color: var(--rosa-vibrante);
   text-align: right;
 }
 
 .final-counter {
   display: flex;
   justify-content: space-around;
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px dashed var(--rosa-suave);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1.5px dashed #bae6fd;
 }
 
 .final-stat {
@@ -666,8 +801,8 @@
 .final-stat-num {
   font-size: 22px;
   font-weight: 800;
-  color: var(--rosa-fuerte);
-  font-family: var(--font-elegante);
+  color: var(--celeste-sanrio);
+  font-family: var(--font-kawaii);
 }
 
 .final-stat-lbl {
@@ -679,16 +814,16 @@
 }
 
 /* ==========================================================================
-   MENÚ FINAL DE ACTIVIDADES INTERACTIVAS
-   (Solo se muestra cuando se completa todo el recorrido de principio a fin)
+   MENÚ FINAL DE ACTIVIDADES INTERACTIVAS & CINNAMOROLL PASTEL
    ========================================================================== */
 .menu-actividades-container {
   display: none;
   width: 100%;
-  margin-top: 20px;
-  padding-top: 18px;
-  border-top: 1.5px dashed var(--rosa-suave);
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1.5px dashed #bae6fd;
   text-align: center;
+  position: relative;
 }
 
 body.menu-desbloqueado .menu-actividades-container {
@@ -701,17 +836,35 @@ body.menu-desbloqueado .menu-actividades-container {
   100% { opacity: 1; transform: translateY(0); }
 }
 
+/* Cinnamoroll comiendo pastel asomándose sobre el menú */
+.cinna-menu-peeker-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.cinna-pastel-img {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(244, 114, 182, 0.3));
+  animation: peekAnimation 3.2s infinite ease-in-out;
+}
+
 .menu-actividades-title {
-  font-family: var(--font-cursiva);
-  font-size: 32px;
-  color: var(--rosa-oscuro);
+  font-family: var(--font-kawaii);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--texto-oscuro);
   margin-bottom: 4px;
 }
 
 .menu-actividades-sub {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--texto-suave);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-weight: 600;
 }
 
@@ -720,20 +873,20 @@ body.menu-desbloqueado .menu-actividades-container {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   width: 100%;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .menu-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--blanco-vidrio-fuerte);
   border: 1.5px solid var(--borde-vidrio);
   border-radius: 20px;
-  padding: 16px 12px;
+  padding: 15px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  box-shadow: 0 4px 15px rgba(201, 24, 74, 0.1);
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.15);
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
   touch-action: manipulation;
@@ -741,19 +894,20 @@ body.menu-desbloqueado .menu-actividades-container {
 
 .menu-card:active {
   transform: scale(0.93);
-  background: #fff0f3;
+  background: #f0f9ff;
 }
 
 .menu-card-icon {
-  font-size: 32px;
+  font-size: 28px;
   margin-bottom: 2px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
 }
 
 .menu-card-title {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
-  color: var(--rosa-oscuro);
+  font-family: var(--font-kawaii);
+  color: var(--texto-oscuro);
 }
 
 .menu-card-desc {
@@ -762,7 +916,7 @@ body.menu-desbloqueado .menu-actividades-container {
   font-weight: 600;
 }
 
-/* Botón flotante para volver al Menú (solo visible al desbloquear el menú tras terminar el recorrido) */
+/* Botón flotante para volver al Menú */
 .btn-volver-menu {
   display: none;
   position: absolute;
@@ -771,16 +925,16 @@ body.menu-desbloqueado .menu-actividades-container {
   z-index: 90;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1.5px solid var(--rosa-suave);
-  color: var(--rosa-fuerte);
-  padding: 8px 15px;
+  background: var(--blanco-vidrio-fuerte);
+  border: 1.5px solid var(--borde-celeste);
+  color: var(--celeste-sanrio);
+  padding: 8px 16px;
   border-radius: 25px;
   font-size: 13.5px;
   font-weight: 700;
-  font-family: var(--font-limpia);
+  font-family: var(--font-kawaii);
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(201, 24, 74, 0.15);
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -793,5 +947,5 @@ body.menu-desbloqueado .btn-volver-menu {
 
 .btn-volver-menu:active {
   transform: scale(0.93);
-  background: #ffe3ea;
+  background: #f0f9ff;
 }

@@ -1,6 +1,6 @@
 /**
  * MAIN.JS
- * Orquestador principal de la aplicación: Navegación, Audio, Haptics y Ciclo de vida.
+ * Orquestador principal de la aplicación: Navegación, Audio, Estela de purpurina, Haptics y Ciclo de vida.
  */
 import { CONFIG } from './config.js';
 import { initPetals, lanzarCelebracion, detenerCelebracion } from './petals.js';
@@ -41,6 +41,25 @@ function initAudioSystem() {
   });
 }
 
+export function playCutePop(freq = 780) {
+  if (!audioCtx || !isPlaying) return;
+  try {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.25, audioCtx.currentTime + 0.08);
+
+    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.12);
+  } catch (e) {}
+}
+
 function playSynthesizedNote(freq, dur = 1.3) {
   if (!audioCtx || !isPlaying) return;
   try {
@@ -51,7 +70,7 @@ function playSynthesizedNote(freq, dur = 1.3) {
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
     gain.gain.setValueAtTime(0, audioCtx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.08);
+    gain.gain.linearRampToValueAtTime(0.07, audioCtx.currentTime + 0.08);
     gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
 
     osc.connect(gain);
@@ -110,14 +129,58 @@ function startSynthesizer() {
 }
 
 /* ==========================================================================
-   3. GESTOR DE NAVEGACIÓN ENTRE PANTALLAS
+   3. ESTELA TÁCTIL (PURPURINA Y ESTRELLITAS AL DESLIZAR EL DEDO)
+   ========================================================================== */
+function initTouchSparkles() {
+  const container = document.getElementById('app-container');
+  if (!container) return;
+
+  let lastSparkleTime = 0;
+  const simbolos = ['✨', '⭐', '💖', '🌸', '💫'];
+
+  function spawnSparkle(clientX, clientY) {
+    const now = performance.now();
+    if (now - lastSparkleTime < 50) return; // 60fps respetuoso con el procesador
+    lastSparkleTime = now;
+
+    const rect = container.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
+
+    const sparkle = document.createElement('div');
+    sparkle.className = 'touch-sparkle';
+    sparkle.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
+    sparkle.style.left = `${x}px`;
+    sparkle.style.top = `${y}px`;
+
+    container.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 650);
+  }
+
+  container.addEventListener('pointermove', (e) => {
+    if (e.buttons > 0 || e.pointerType === 'touch') {
+      spawnSparkle(e.clientX, e.clientY);
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      spawnSparkle(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   4. GESTOR DE NAVEGACIÓN ENTRE PANTALLAS
    ========================================================================== */
 let pantallaActual = 'portada';
-
 const nombresPantallas = ['portada', 'carta', 'jardin', 'juego', 'pregunta', 'final'];
 
 export function irAPantalla(nombre) {
-  vibrar([30]);
+  vibrar(28);
+  playCutePop(820);
 
   nombresPantallas.forEach(key => {
     const el = document.getElementById(`screen-${key}`);
@@ -137,7 +200,6 @@ export function irAPantalla(nombre) {
   }
 
   if (nombre === 'final') {
-    // Desbloquear menú de actividades y botones de regreso una vez completado el recorrido
     document.body.classList.add('menu-desbloqueado');
     lanzarCelebracion();
   } else {
@@ -146,7 +208,7 @@ export function irAPantalla(nombre) {
 }
 
 /* ==========================================================================
-   4. APLICAR CONFIGURACIÓN AL DOM
+   5. APLICAR CONFIGURACIÓN AL DOM
    ========================================================================== */
 function renderTextos() {
   // Portada
@@ -177,18 +239,19 @@ function renderTextos() {
 }
 
 /* ==========================================================================
-   5. INICIALIZACIÓN
+   6. INICIALIZACIÓN
    ========================================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   renderTextos();
   initAudioSystem();
   initPetals();
+  initTouchSparkles();
 
-  // Ocultar pantalla de carga suavemente tras 900ms
+  // Ocultar pantalla de carga suavemente tras 1000ms
   setTimeout(() => {
     const loader = document.getElementById('loader-screen');
     if (loader) loader.classList.add('hidden');
-  }, 900);
+  }, 1000);
 
   // Botón flotante de música
   if (btnMusica) {
@@ -200,35 +263,43 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Inicializar Sobre y Carta
   initEnvelope(() => {
+    playCutePop(900);
     if (!isPlaying) toggleAudio();
   });
 
   // Inicializar Jardín
   initGarden(
     () => {
-      // Al plantar flores
-      vibrar(22);
-      if (isPlaying && !audioHtml) playSynthesizedNote(420 + Math.random() * 250, 0.4);
+      vibrar(20);
+      playCutePop(720 + Math.random() * 200);
     },
     () => {
-      // Al completar jardín
       vibrar([50, 40, 100, 40, 150]);
     }
   );
 
   // Inicializar Minijuego de corazones
   initHeartsGame(
-    () => vibrar(28),
-    () => vibrar([60, 40, 100, 40, 150])
+    () => {
+      vibrar(25);
+      playCutePop(850 + Math.random() * 250);
+    },
+    () => {
+      vibrar([60, 40, 100, 40, 150]);
+    }
   );
 
   // Inicializar Pregunta
   initQuestion(
     () => {
       vibrar([100, 50, 100, 50, 200]);
+      playCutePop(1020);
       irAPantalla('final');
     },
-    () => vibrar(25)
+    () => {
+      vibrar(22);
+      playCutePop(540); // Toque divertido de sorpresa al escapar el No
+    }
   );
 
   // Enlazar botones de avance del flujo lineal
@@ -253,7 +324,6 @@ window.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       const target = el.getAttribute('data-nav');
       if (target) {
-        // Reinicio completo de la actividad seleccionada
         if (target === 'carta') {
           resetEnvelope();
         } else if (target === 'jardin') {

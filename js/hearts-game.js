@@ -112,6 +112,14 @@ function atrapar(heartElement, x, y) {
 
   score++;
 
+  // Cinnamoroll da un saltito o giro en su avioncito al atrapar un corazón
+  const cinnaAvion = document.getElementById('cinnamoroll-avion');
+  if (cinnaAvion) {
+    cinnaAvion.classList.remove('avion-jump');
+    void cinnaAvion.offsetWidth; // reiniciar animación
+    cinnaAvion.classList.add('avion-jump');
+  }
+
   if (window._heartsCallbacks?.onCatchCallback) {
     window._heartsCallbacks.onCatchCallback();
   }

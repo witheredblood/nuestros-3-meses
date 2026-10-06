@@ -1,49 +1,59 @@
 /* ==========================================================================
    BASE.CSS
-   Variables, Reset, Tipografías, Colores y Accesibilidad
+   Paleta Kawaii Cinnamoroll, Tipografías Sanrio, Reset y Tokens
    ========================================================================== */
 
-/* Variables globales y tokens de diseño */
 :root {
-  /* Paleta cromática romántica */
-  --rosa-fondo-1: #fff0f3;
-  --rosa-fondo-2: #ffe5ec;
-  --rosa-fondo-3: #fce7f3;
-  --rosa-pastel: #fbcfe8;
-  --rosa-suave: #ffb3c1;
-  --rosa-medio: #ff758f;
-  --rosa-vibrante: #ff4d6d;
-  --rosa-fuerte: #c9184a;
-  --rosa-oscuro: #800f2f;
-  --durazno: #fed7aa;
-  --lavanda: #eed3d9;
-  --dorado: #f59e0b;
-  --dorado-suave: #fbbf24;
-  --verde-tallo: #15803d;
-  --verde-hoja: #4ade80;
-  
-  /* Textos y contrastes */
-  --texto-oscuro: #4a1525;
-  --texto-suave: #75293d;
-  --texto-blanco: #ffffff;
-  
-  /* Superficies Glassmorphism */
-  --blanco-vidrio: rgba(255, 255, 255, 0.82);
-  --borde-vidrio: rgba(255, 255, 255, 0.92);
-  --sombra-romantica: 0 12px 32px -4px rgba(201, 24, 74, 0.18), 0 4px 12px rgba(0, 0, 0, 0.05);
-  --sombra-boton: 0 8px 24px rgba(255, 77, 109, 0.38), 0 2px 6px rgba(0, 0, 0, 0.06);
+  /* Paleta temática Cinnamoroll & Sanrio Pastel */
+  --celeste-cielo-1: #d8eeff;
+  --celeste-cielo-2: #c0e2fc;
+  --celeste-cielo-3: #a8d5fa;
+  --celeste-pastel: #bde0fe;
+  --celeste-suave: #90cdf4;
+  --celeste-acento: #38bdf8;
+  --celeste-sanrio: #0284c7;
 
-  /* Familias tipográficas con fallbacks seguros */
-  --font-cursiva: 'Dancing Script', 'Brush Script MT', 'Great Vibes', cursive;
-  --font-elegante: 'Playfair Display', Georgia, serif;
+  /* Rosas y rubores suaves de Cinnamoroll */
+  --rosa-rubor: #ffd1dc;
+  --rosa-pastel: #fbcfe8;
+  --rosa-suave: #f472b6;
+  --rosa-vibrante: #ec4899;
+  --rosa-fuerte: #db2777;
+
+  /* Blancos nube y cremas */
+  --blanco-nube: #ffffff;
+  --crema-pastel: #fffcf4;
+  --amarillo-estrellas: #fef08a;
+  --lavanda-suave: #e9d5ff;
+
+  /* Textos con excelente contraste y dulzura */
+  --texto-oscuro: #1e3a5f;
+  --texto-suave: #475569;
+  --texto-amor: #be185d;
+  --texto-blanco: #ffffff;
+
+  /* Glassmorphism & Sombras Pastel */
+  --blanco-vidrio: rgba(255, 255, 255, 0.88);
+  --blanco-vidrio-fuerte: rgba(255, 255, 255, 0.94);
+  --borde-vidrio: rgba(255, 255, 255, 0.95);
+  --borde-celeste: rgba(186, 230, 253, 0.65);
+  --sombra-celeste: 0 12px 32px -4px rgba(14, 116, 144, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --sombra-rosa: 0 10px 28px -4px rgba(236, 72, 153, 0.2), 0 4px 10px rgba(0, 0, 0, 0.04);
+  --sombra-boton: 0 8px 24px rgba(56, 189, 248, 0.38), 0 3px 8px rgba(0, 0, 0, 0.06);
+  --sombra-boton-rosa: 0 8px 24px rgba(244, 114, 182, 0.42), 0 3px 8px rgba(0, 0, 0, 0.06);
+
+  /* Tipografías tiernas de Google Fonts */
+  --font-kawaii: 'Mali', 'Quicksand', -apple-system, sans-serif;
+  --font-cursiva: 'Dancing Script', 'Brush Script MT', cursive;
   --font-limpia: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Tamaños base */
-  --radius-card: 26px;
+  /* Radios redondeados ultra suaves */
+  --radius-card: 28px;
   --radius-boton: 50px;
+  --radius-badge: 24px;
 }
 
-/* Reset estricto para evitar problemas táctiles y de zoom */
+/* Reset móvil estricto */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -60,7 +70,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--rosa-fondo-1) 0%, var(--rosa-fondo-2) 50%, var(--rosa-fondo-3) 100%);
+  background: linear-gradient(180deg, var(--celeste-cielo-1) 0%, #e0f2fe 45%, #fff1f2 100%);
   font-family: var(--font-limpia);
   color: var(--texto-oscuro);
   font-size: 16px;
@@ -69,11 +79,11 @@ html, body {
   touch-action: manipulation;
 }
 
-/* Enlaces e imágenes */
 img, svg {
   display: block;
   max-width: 100%;
   height: auto;
+  pointer-events: none;
 }
 
 button {
@@ -82,4 +92,5 @@ button {
   border: none;
   background: none;
   outline: none;
+  touch-action: manipulation;
 }

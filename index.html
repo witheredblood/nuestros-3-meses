@@ -5,25 +5,25 @@
   <!-- Viewport estricto para celulares: sin zoom accidental, 100dvh y viewport-fit=cover -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   
-  <!-- Color de la barra de navegación del navegador en celulares (rosa romántico) -->
-  <meta name="theme-color" content="#ff4d6d">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Color de la barra de navegación del navegador en celulares (celeste pastel Cinnamoroll) -->
+  <meta name="theme-color" content="#bde0fe">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <!-- Metadatos para compartir en WhatsApp, Instagram, etc. -->
-  <title>3 Meses Juntos 💗</title>
-  <meta name="description" content="Una sorpresa especial e interactiva para celebrar nuestros 3 meses de novios.">
-  <meta property="og:title" content="3 Meses Juntos 💗">
-  <meta property="og:description" content="Toca aquí para abrir una carta muy especial para ti...">
+  <title>3 Meses Juntos 💗 Cinnamoroll</title>
+  <meta name="description" content="Una sorpresa especial e interactiva con Cinnamoroll para celebrar nuestros 3 meses de novios.">
+  <meta property="og:title" content="3 Meses Juntos 💗 Cinnamoroll">
+  <meta property="og:description" content="Toca aquí para abrir una sorpresa muy especial para ti...">
   <meta property="og:type" content="website">
 
   <!-- Favicon vectorial -->
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 
-  <!-- Tipografías elegantes de Google Fonts -->
+  <!-- Tipografías de Google Fonts: Mali (kawaii redondeada), Quicksand y Dancing Script -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Mali:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- Estilos modulares desacoplados -->
   <link rel="stylesheet" href="css/base.css">
@@ -34,11 +34,12 @@
 <body>
 
   <!-- ==========================================================================
-       PANTALLA DE CARGA CORTA (LOADER)
+       PANTALLA DE CARGA BONITA CON CINNAMOROLL
        ========================================================================== -->
   <div id="loader-screen">
-    <img src="assets/img/flower-rose.svg" alt="Cargando..." class="loader-flower-icon">
-    <div class="loader-text">Floreciendo para ti... 🌸</div>
+    <img src="assets/img/cinnamoroll-flor.png" alt="Cinnamoroll" class="loader-cinnamoroll">
+    <img src="assets/img/flower-rose.svg" alt="Floreciendo" class="loader-flower-icon">
+    <div class="loader-text">Preparando tu sorpresa... 🌸✨</div>
   </div>
 
   <!-- ==========================================================================
@@ -47,7 +48,7 @@
   <div id="orientation-warning">
     <div class="orientation-icon">📱✨</div>
     <div class="orientation-title">Gírame de vuelta 💕</div>
-    <p class="orientation-desc">Esta experiencia está diseñada para disfrutarse en vertical.</p>
+    <p class="orientation-desc">Esta experiencia está diseñada para disfrutarse en vertical con Cinnamoroll.</p>
   </div>
 
   <!-- ==========================================================================
@@ -55,10 +56,24 @@
        ========================================================================== -->
   <div id="app-container">
 
+    <!-- Fondo de nubes suaves en capas y estrellitas titilantes -->
+    <div class="sky-decorations" aria-hidden="true">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+      <span class="twinkle-star star-1">✨</span>
+      <span class="twinkle-star star-2">⭐</span>
+      <span class="twinkle-star star-3">✨</span>
+      <span class="twinkle-star star-4">⭐</span>
+      <span class="twinkle-star star-5">✨</span>
+    </div>
+
     <!-- Botón flotante para música -->
-    <button id="btn-musica" class="music-floating-btn" title="Música romántica" aria-label="Música">
-      🎵
-    </button>
+    <div class="top-controls">
+      <button id="btn-musica" class="music-floating-btn" title="Música romántica" aria-label="Música">
+        🎵
+      </button>
+    </div>
 
     <!-- Canvas de fondo para pétalos suaves flotando -->
     <canvas id="petals-canvas"></canvas>
@@ -66,57 +81,12 @@
     <!-- Canvas para celebración / confeti final -->
     <canvas id="celebration-canvas"></canvas>
 
-    <!-- Decoraciones florales SVG en las esquinas -->
-    <svg class="corner-floral corner-top-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C30,10 60,35 65,70 C50,55 25,45 0,40 Z" fill="#fbcfe8" opacity="0.8"/>
-      <path d="M10,0 C35,25 50,50 45,85 C35,60 20,40 10,20 Z" fill="#fda4af" opacity="0.7"/>
-      <circle cx="28" cy="28" r="14" fill="#fb7185"/>
-      <circle cx="28" cy="28" r="7" fill="#fef08a"/>
-      <circle cx="55" cy="18" r="9" fill="#f43f5e" opacity="0.9"/>
-      <circle cx="16" cy="52" r="11" fill="#f472b6" opacity="0.9"/>
-      <path d="M0,75 C20,70 35,60 45,45" stroke="#86efac" stroke-width="3" stroke-linecap="round"/>
-      <ellipse cx="42" cy="48" rx="8" ry="4" transform="rotate(-30 42 48)" fill="#86efac"/>
-    </svg>
-
-    <svg class="corner-floral corner-top-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C30,10 60,35 65,70 C50,55 25,45 0,40 Z" fill="#fbcfe8" opacity="0.8"/>
-      <path d="M10,0 C35,25 50,50 45,85 C35,60 20,40 10,20 Z" fill="#fda4af" opacity="0.7"/>
-      <circle cx="28" cy="28" r="14" fill="#fb7185"/>
-      <circle cx="28" cy="28" r="7" fill="#fef08a"/>
-      <circle cx="55" cy="18" r="9" fill="#f43f5e" opacity="0.9"/>
-      <circle cx="16" cy="52" r="11" fill="#f472b6" opacity="0.9"/>
-      <path d="M0,75 C20,70 35,60 45,45" stroke="#86efac" stroke-width="3" stroke-linecap="round"/>
-      <ellipse cx="42" cy="48" rx="8" ry="4" transform="rotate(-30 42 48)" fill="#86efac"/>
-    </svg>
-
-    <svg class="corner-floral corner-bottom-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C30,10 60,35 65,70 C50,55 25,45 0,40 Z" fill="#fbcfe8" opacity="0.8"/>
-      <path d="M10,0 C35,25 50,50 45,85 C35,60 20,40 10,20 Z" fill="#fda4af" opacity="0.7"/>
-      <circle cx="28" cy="28" r="14" fill="#fb7185"/>
-      <circle cx="28" cy="28" r="7" fill="#fef08a"/>
-      <circle cx="55" cy="18" r="9" fill="#f43f5e" opacity="0.9"/>
-      <circle cx="16" cy="52" r="11" fill="#f472b6" opacity="0.9"/>
-      <path d="M0,75 C20,70 35,60 45,45" stroke="#86efac" stroke-width="3" stroke-linecap="round"/>
-      <ellipse cx="42" cy="48" rx="8" ry="4" transform="rotate(-30 42 48)" fill="#86efac"/>
-    </svg>
-
-    <svg class="corner-floral corner-bottom-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C30,10 60,35 65,70 C50,55 25,45 0,40 Z" fill="#fbcfe8" opacity="0.8"/>
-      <path d="M10,0 C35,25 50,50 45,85 C35,60 20,40 10,20 Z" fill="#fda4af" opacity="0.7"/>
-      <circle cx="28" cy="28" r="14" fill="#fb7185"/>
-      <circle cx="28" cy="28" r="7" fill="#fef08a"/>
-      <circle cx="55" cy="18" r="9" fill="#f43f5e" opacity="0.9"/>
-      <circle cx="16" cy="52" r="11" fill="#f472b6" opacity="0.9"/>
-      <path d="M0,75 C20,70 35,60 45,45" stroke="#86efac" stroke-width="3" stroke-linecap="round"/>
-      <ellipse cx="42" cy="48" rx="8" ry="4" transform="rotate(-30 42 48)" fill="#86efac"/>
-    </svg>
-
     <!-- ==========================================================================
-         SECCIÓN 1: PORTADA
+         SECCIÓN 1: PORTADA (CINNAMOROLL CON LA FLOR ROSA Y RAMO)
          ========================================================================== -->
     <section id="screen-portada" class="screen active">
-      <div>
-        <span class="badge-romantico">Nuestra Historia</span>
+      <div class="portada-header">
+        <span class="badge-romantico">☁️ Nuestra Historia ✨</span>
         <h1 class="portada-title">3 meses juntos 💗</h1>
         <h2 id="txt-para-portada" class="portada-name">Para: Mi Amor</h2>
         <p id="txt-frase-portada" class="portada-quote">
@@ -124,22 +94,25 @@
         </p>
       </div>
 
-      <!-- Ramo animado con aura -->
-      <div class="bouquet-wrapper">
+      <!-- Cinnamoroll grande flotando junto al ramo de flores -->
+      <div class="portada-stage">
         <div class="bouquet-aura"></div>
-        <img src="assets/img/bouquet.svg" alt="Ramo de flores" class="bouquet-img">
+        <div class="cinna-flor-container">
+          <img src="assets/img/cinnamoroll-flor.png" alt="Cinnamoroll con flor rosa" class="cinna-flor-img">
+          <div class="cinna-shadow"></div>
+        </div>
+        <div class="bouquet-wrapper-portada">
+          <img src="assets/img/bouquet.svg" alt="Ramo de flores" class="bouquet-img">
+        </div>
       </div>
 
       <button id="btn-ir-carta" class="btn-romantic">
-        <span>Toca aquí</span> 🌹
+        <span>Toca aquí</span> 💌
       </button>
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN 2: CARTA DE AMOR
-         ========================================================================== -->
-    <!-- ==========================================================================
-         SECCIÓN 2: CARTA DE AMOR
+         SECCIÓN 2: CARTA DE AMOR (CINNAMOROLL FELIZ ASOMÁNDOSE)
          ========================================================================== -->
     <section id="screen-carta" class="screen">
       <button class="btn-volver-menu" data-nav="final" title="Volver al Menú">
@@ -147,24 +120,29 @@
       </button>
 
       <div style="text-align: center; margin-top: 15px;">
-        <span class="badge-romantico">Un detalle para ti</span>
-        <h2 style="font-family: var(--font-cursiva); font-size: 34px; color: var(--rosa-oscuro);">
-          Mi carta para ti 💌
+        <span class="badge-romantico">Un detalle para ti 💌</span>
+        <h2 style="font-family: var(--font-kawaii); font-size: 30px; font-weight: 700; color: var(--texto-oscuro);">
+          Mi carta para ti 💕
         </h2>
       </div>
 
-      <div id="envelope-trigger" class="envelope-container">
-        <div class="envelope">
-          <div class="envelope-flap"></div>
-          <div class="envelope-pocket"></div>
-          <div class="envelope-stamp">💌</div>
-          
-          <div class="letter-paper">
-            <div id="txt-para-carta" class="letter-header">Para: Mi Amor</div>
-            <div id="letter-body" class="letter-content">
-              <span id="typed-text"></span><span class="letter-cursor"></span>
+      <div class="carta-stage">
+        <!-- Cinnamoroll feliz asomándose sobre el sobre -->
+        <img src="assets/img/cinnamoroll-feliz.png" alt="Cinnamoroll feliz" class="cinna-carta-peeker">
+
+        <div id="envelope-trigger" class="envelope-container">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-stamp">💌</div>
+            
+            <div class="letter-paper">
+              <div id="txt-para-carta" class="letter-header">Para: Mi Amor</div>
+              <div id="letter-body" class="letter-content">
+                <span id="typed-text"></span><span class="letter-cursor"></span>
+              </div>
+              <div id="txt-de-carta" class="letter-footer">Con todo mi amor, Tu Novio ❤️</div>
             </div>
-            <div id="txt-de-carta" class="letter-footer">Con todo mi amor, Tu Novio ❤️</div>
           </div>
         </div>
       </div>
@@ -174,21 +152,24 @@
       </div>
 
       <button id="btn-ir-jardin" class="btn-romantic" style="opacity: 0.3; pointer-events: none;">
-        <span>Continuar</span> 💌
+        <span>Continuar</span> 🌷
       </button>
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN 3: JARDÍN QUE FLORECE AL TOCAR
+         SECCIÓN 3: JARDÍN DE FLORES (CINNAMOROLL CON GLOBOS FLOTANDO)
          ========================================================================== -->
     <section id="screen-jardin" class="screen">
       <button class="btn-volver-menu" data-nav="final" title="Volver al Menú">
         <span>⬅</span> Menú
       </button>
 
+      <!-- Cinnamoroll con tres globos flotando en el cielo del jardín -->
+      <img src="assets/img/cinnamoroll-globos.png" alt="Cinnamoroll con globos" class="cinna-jardin-globos">
+
       <div class="jardin-header">
         <div class="jardin-badge">
-          <span>Nuestro Jardín</span> 🌷
+          <span>Nuestro Jardín</span> 🌷✨
         </div>
         <p class="jardin-instruccion">
           Toca la pantalla y haz florecer nuestro amor ✨
@@ -200,21 +181,21 @@
 
       <!-- Modal que aparece al llegar a la meta de flores -->
       <div id="jardin-modal" class="glass-card jardin-modal">
-        <div style="font-size: 40px; margin-bottom: 8px;">💐✨</div>
-        <h3 style="font-family: var(--font-cursiva); font-size: 30px; color: var(--rosa-oscuro); margin-bottom: 10px;">
+        <div style="font-size: 38px; margin-bottom: 6px;">💐✨</div>
+        <h3 style="font-family: var(--font-kawaii); font-size: 26px; font-weight: 700; color: var(--texto-oscuro); margin-bottom: 8px;">
           ¡Nuestro jardín floreció!
         </h3>
-        <p id="txt-jardin-modal" style="font-size: 16px; color: var(--texto-oscuro); line-height: 1.5; font-weight: 600; margin-bottom: 20px;">
+        <p id="txt-jardin-modal" style="font-size: 15.5px; color: var(--texto-suave); line-height: 1.5; font-weight: 600; margin-bottom: 18px;">
           "Así como este jardín, tú haces florecer lo más bonito de mi vida."
         </p>
         <button id="btn-ir-juego" class="btn-romantic">
-          <span>Seguir</span> 🌸
+          <span>Seguir</span> 💖
         </button>
       </div>
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN 4: ATRAPA LOS CORAZONES (MINIJUEGO)
+         SECCIÓN 4: ATRAPA LOS CORAZONES (CINNAMOROLL EN EL AVIONCITO)
          ========================================================================== -->
     <section id="screen-juego" class="screen">
       <button class="btn-volver-menu" data-nav="final" title="Volver al Menú">
@@ -223,7 +204,14 @@
 
       <div class="juego-hud">
         <div class="juego-hint-badge">
-          ¡Atrapa los corazones que caen! 💗
+          ¡Atrapa los corazones que caen! 💖
+        </div>
+      </div>
+
+      <!-- Cinnamoroll en el avioncito en la parte superior -->
+      <div class="cinna-avion-wrapper">
+        <div class="cinna-avion-patrol">
+          <img id="cinnamoroll-avion" src="assets/img/cinnamoroll-avion.png" alt="Cinnamoroll en avión" class="cinna-avion-img">
         </div>
       </div>
 
@@ -232,11 +220,11 @@
 
       <!-- Modal sorpresa al ganar el minijuego -->
       <div id="juego-modal" class="glass-card juego-modal">
-        <div style="font-size: 44px; margin-bottom: 8px;">🎁💖</div>
-        <h3 style="font-family: var(--font-cursiva); font-size: 32px; color: var(--rosa-oscuro); margin-bottom: 10px;">
+        <div style="font-size: 40px; margin-bottom: 6px;">🎁💖</div>
+        <h3 style="font-family: var(--font-kawaii); font-size: 28px; font-weight: 700; color: var(--texto-oscuro); margin-bottom: 8px;">
           ¡Completado!
         </h3>
-        <p id="txt-juego-modal" style="font-size: 16.5px; color: var(--texto-oscuro); line-height: 1.5; font-weight: 600; margin-bottom: 20px;">
+        <p id="txt-juego-modal" style="font-size: 15.5px; color: var(--texto-suave); line-height: 1.5; font-weight: 600; margin-bottom: 18px;">
           "Atrapaste cada latido de mi corazón. Eres el premio más hermoso que el destino me regaló."
         </p>
         <button id="btn-ir-pregunta" class="btn-romantic">
@@ -246,15 +234,15 @@
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN 5: LA PREGUNTA IMPOSIBLE
+         SECCIÓN 5: LA PREGUNTA IMPOSIBLE (CINNAMOROLL CUPIDO)
          ========================================================================== -->
     <section id="screen-pregunta" class="screen">
       <button class="btn-volver-menu" data-nav="final" title="Volver al Menú">
         <span>⬅</span> Menú
       </button>
 
-      <div style="margin-top: 15px;">
-        <span class="badge-romantico">Una pregunta especial</span>
+      <div class="pregunta-header">
+        <span class="badge-romantico">🏹 Pregunta Especial 💕</span>
         <h2 class="pregunta-titulo">
           ¿Quieres seguir conmigo otros 3 meses… y todos los que sigan?
         </h2>
@@ -263,12 +251,15 @@
         </p>
       </div>
 
-      <!-- Anillo en SVG -->
-      <img src="assets/img/ring.svg" alt="Anillo" class="pregunta-ring-img">
+      <!-- Cinnamoroll Cupido mirando la pregunta -->
+      <div class="cinna-cupido-stage">
+        <img id="cinnamoroll-cupido" src="assets/img/cinnamoroll-cupido.png" alt="Cinnamoroll Cupido" class="cinna-cupido-img">
+        <img src="assets/img/ring.svg" alt="Anillo" class="pregunta-ring-img">
+      </div>
 
       <div class="pregunta-actions" id="pregunta-container">
         <!-- Botón SÍ (crece con cada intento fallido) -->
-        <button id="btn-si" class="btn-romantic" style="font-size: 22px; padding: 18px 40px;">
+        <button id="btn-si" class="btn-romantic" style="font-size: 21px; padding: 18px 40px;">
           <span>¡Sí, claro que sí!</span> 💖
         </button>
       </div>
@@ -280,11 +271,11 @@
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN 6: FINAL / CELEBRACIÓN CON MENÚ DE ACTIVIDADES
+         SECCIÓN 6: FINAL / CELEBRACIÓN (CINNAMOROLL PASTEL & MENÚ)
          ========================================================================== -->
     <section id="screen-final" class="screen">
       <div>
-        <span class="final-badge">Para Siempre</span>
+        <span class="final-badge">☁️ Para Siempre ✨</span>
         <h2 class="final-title">¡Sabía que dirías que sí! 💍💖</h2>
       </div>
 
@@ -313,8 +304,11 @@
         </div>
       </div>
 
-      <!-- Menú interactivo para acceder a cada una de las actividades -->
+      <!-- Menú interactivo con Cinnamoroll comiendo pastel -->
       <div class="menu-actividades-container">
+        <div class="cinna-menu-peeker-wrapper">
+          <img src="assets/img/cinnamoroll-pastel.png" alt="Cinnamoroll con pastel" class="cinna-pastel-img">
+        </div>
         <h3 class="menu-actividades-title">Nuestras Actividades 💕</h3>
         <p class="menu-actividades-sub">Toca para revivir cualquier momento especial</p>
         
@@ -345,14 +339,14 @@
         </div>
       </div>
 
-      <button id="btn-reiniciar" class="btn-romantic" style="background: linear-gradient(135deg, #f43f5e, #be123c); margin-bottom: 20px;">
+      <button id="btn-reiniciar" class="btn-romantic btn-celeste" style="margin-bottom: 20px;">
         <span>Revivir de nuevo</span> 🔄
       </button>
     </section>
 
   </div>
 
-  <!-- Carga modular ES6 (sin frameworks ni bundlers) -->
+  <!-- Carga modular ES6 -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
